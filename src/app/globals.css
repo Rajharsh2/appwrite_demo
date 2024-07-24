@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .input {
+    @apply flex justify-between w-full bg-[#EEF0E5] border-gray-300 border-2 rounded-md outline-none;
+  }
+
+  .auth-btn {
+    @apply w-4/5 text-center text-white text-xl font-semibold rounded-lg pt-1 pb-2 my-4 ml-[10%] bg-green-800;
+  }
+
+  .label {
+    @apply text-green-900 font-semibold block;
+  }
+}
