@@ -6,12 +6,22 @@
   .input {
     @apply flex justify-between w-full bg-[#EEF0E5] border-gray-300 border-2 rounded-md outline-none;
   }
+  .btmInput {
+    @apply flex justify-between w-full border-[3px] rounded-lg outline-none;
+    @apply focus:border-blue-500 focus:ring-2 focus:ring-blue-200;
+  }
 
   .auth-btn {
     @apply w-4/5 text-center text-white text-xl font-semibold rounded-lg pt-1 pb-2 my-4 ml-[10%] bg-green-800;
   }
+  .btm-auth-btn {
+    @apply w-full text-center text-white text-xl font-semibold rounded-lg pt-1 pb-2 my-4 bg-blue-700;
+  }
 
   .label {
     @apply text-green-900 font-semibold block;
+  }
+  .btm-label {
+    @apply text-black font-semibold block;
   }
 }

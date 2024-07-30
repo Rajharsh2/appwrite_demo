@@ -10,5 +10,6 @@ const serverClient = new sdk.Client()
   .setProject(appwriteCredentials.projectId)
   .setKey(appwriteCredentials.apiKey); // Your secret API key
 
+export const serverUser = new sdk.Users(serverClient);
 export const serverDatabase = new sdk.Databases(serverClient);
 export const serverAvatar = new sdk.Avatars(serverClient);

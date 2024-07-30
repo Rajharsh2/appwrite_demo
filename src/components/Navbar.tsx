@@ -16,10 +16,10 @@ import Image from 'next/image';
 import profilepic from '../assets/profilepic.jpg';
 
 const navigation = [
-  {name: 'ALL', Link: '/todo/all', current: true},
+  {name: 'ALL', Link: '/todo', current: true},
   {name: 'Pending', Link: '/todo/progress', current: false},
   {name: 'Completed', Link: '/todo/completed', current: false},
-  {name: 'Add Todo', Link: '/todo/create', current: false},
+  {name: 'Add Todo', Link: '/todo/event', current: false},
 ];
 
 function classNames(...classes: string[]) {

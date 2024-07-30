@@ -17,3 +17,23 @@ export const sendWhatsAppMsg = (loggedUser: any) => {
     console.error('Error sending WhatsApp message:', error);
   }
 };
+
+// export const sendMail = () => {
+
+//   const mailgun = new Mailgun(FormData);
+//   const mg = mailgun.client({
+//     username: 'api',
+//     key: priv_key,
+//   });
+
+//   mg.messages
+//     .create(domain, {
+//       from: 'User <rajharshyadav2@gmail.com>',
+//       to: ['rajharshyadav08@gmail.com'],
+//       subject: 'testing',
+//       text: 'Testing some Mailgun awesomeness!',
+//       html: '<h1>Testing some Mailgun awesomeness!</h1>',
+//     })
+//     .then((msg) => console.log(msg)) // logs response data
+//     .catch((err) => console.error(err)); // logs any error
+// };

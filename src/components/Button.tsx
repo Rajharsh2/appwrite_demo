@@ -23,7 +23,7 @@ export interface ButtonProps {
    *
    * @type {'submit'} [buttonType]
    */
-  type?: 'submit';
+  type?: 'submit' | 'button';
 
   disabled?: boolean;
   /**

@@ -20,6 +20,7 @@ type TextFieldProps = ComponentProps<'input'> & {
   error: string | undefined;
   className: string;
   required?: boolean;
+  isOtp?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -33,6 +34,7 @@ const TextField = ({
   className,
   onChange,
   required,
+  isOtp,
   ...delegated
 }: TextFieldProps) => {
   let actualId = React.useId();
@@ -40,13 +42,32 @@ const TextField = ({
   const validTypes = ['text', 'password'];
   const isValidType = validTypes.includes(type);
   return (
-    <>
-      <label htmlFor={actualId} className="label">
-        {label}
-        {required && <span className="text-red-600 ml-0.5">*</span>}
+    <div className={className}>
+      <label
+        htmlFor={actualId}
+        className="btm-label flex justify-between mb-[5px]"
+      >
+        <div>
+          {label}
+          {required && <span className="text-red-600 ml-0.5">*</span>}
+        </div>
+        {isOtp && (
+          <button className="font-medium text-base text-blue-600">
+            Resend ?
+          </button>
+        )}
       </label>
-      <div className={className}>
-        <input
+      {/* <div className={className}> */}
+      <input
+        {...delegated}
+        id={actualId}
+        type={isValidType ? type : 'text'}
+        name={name}
+        placeholder={placeholder}
+        className="btmInput py-2 px-3"
+        onChange={onChange}
+      />
+      {/* <input
           {...delegated}
           id={actualId}
           type={isValidType ? type : 'text'}
@@ -54,12 +75,12 @@ const TextField = ({
           placeholder={placeholder}
           className="bg-[#EEF0E5] border-none rounded-md py-2 px-3 w-full"
           onChange={onChange}
-        />
-      </div>
+        /> */}
+      {/* </div> */}
       {error ? (
         <p className="text-red-700 text-sm font-medium mb-3">{error}</p>
       ) : null}
-    </>
+    </div>
   );
 };
 

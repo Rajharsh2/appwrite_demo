@@ -25,9 +25,9 @@ const TodoEventPage = () => {
 
     const newEvent = await createEvents(
       {
-        name: 'Evetn 4',
-        description: 'Event description 4',
-        venue: 'Venue 4',
+        name: 'Evetn 6',
+        description: 'Event description 6',
+        venue: 'Venue 6',
         date: new Date().toISOString(), // ISO 8601 format for datetime
         entryFee: 0,
         categories: 'acting',

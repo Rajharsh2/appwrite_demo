@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        'input-bg': 'hsla(0, 0%, 100%, 1)',
+      },
+      boxShadow: {
+        input: '40px 40px 60px hsla(215, 13%, 91%, 0.74)',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

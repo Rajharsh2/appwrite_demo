@@ -28,15 +28,16 @@ export const register = async (
       userData.userEmail,
       userData.userPassword,
     );
-    console.log(loggedUser);
 
-    console.log(userAccount);
+    const verificationUrl = `http://localhost:3000/verify-email?userId=${userAccount.$id}`;
+    const response = await account.createVerification(verificationUrl);
+    console.log('regiter method', response);
     return {
       type: 'success',
       data: userAccount,
     };
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     return errorWithProperMsg(error);
   }
 };
@@ -70,7 +71,7 @@ export const getCurrentUser = async (): Promise<
 > => {
   try {
     const loggedInUser = await account.get();
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
 
     return {
       type: 'success',
@@ -102,6 +103,53 @@ export const getAllSessions = async () => {
     return {
       type: 'success',
       data: sessions,
+    };
+  } catch (error) {
+    return errorWithProperMsg(error);
+  }
+};
+
+export const verifyEmail = async (
+  userId: string,
+  token: string,
+): Promise<ServerActionResponse<Models.Token>> => {
+  try {
+    const response = await account.updateVerification(userId, token);
+    return {
+      type: 'success',
+      data: response,
+    };
+  } catch (error) {
+    return errorWithProperMsg(error);
+  }
+};
+
+export const loginByPhone = async (
+  phone: string,
+): Promise<ServerActionResponse<Models.Token>> => {
+  try {
+    const result = await account.createPhoneToken(ID.unique(), `+91${phone}`);
+
+    console.log(result);
+    return {
+      type: 'success',
+      data: result,
+    };
+  } catch (error) {
+    return errorWithProperMsg(error);
+  }
+};
+
+export const createPhoneLoginSession = async (
+  userId: string,
+  token: string,
+): Promise<ServerActionResponse<Models.Session>> => {
+  try {
+    const result = await account.createSession(userId, token);
+    console.log(result);
+    return {
+      type: 'success',
+      data: result,
     };
   } catch (error) {
     return errorWithProperMsg(error);

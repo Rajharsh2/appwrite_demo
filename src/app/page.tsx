@@ -17,10 +17,9 @@ export default async function Home() {
   // };
   // await isValidToken();
 
-  if (user.status !== 200) {
-    redirect('/login');
+  if (user.type === 'success') {
+    redirect('/todo');
   }
-
   return (
     <div className="p-[20%]">
       <h1 className="text-center font-bold text-green-700 text-2xl">
@@ -28,7 +27,4 @@ export default async function Home() {
       </h1>
     </div>
   );
-}
-function validateAccessToken() {
-  throw new Error('Function not implemented.');
 }

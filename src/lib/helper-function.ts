@@ -1,4 +1,3 @@
-import {StatusCodes} from 'http-status-codes';
 import {ServerActionErrorResponse} from './type';
 
 export const errorWithProperMsg = (error: any): ServerActionErrorResponse => {
@@ -10,7 +9,8 @@ export const errorWithProperMsg = (error: any): ServerActionErrorResponse => {
     // };
     return {
       type: 'error',
-      errors: 'Bad request. Please check your input and try again',
+      // errors: 'Bad request. Please check your input and try again',
+      errors: error.response.message,
     };
   }
   if (error.code === 401) {
@@ -22,7 +22,8 @@ export const errorWithProperMsg = (error: any): ServerActionErrorResponse => {
       // };
       return {
         type: 'error',
-        errors: 'Invalid credentials.',
+        // errors: 'Invalid credentials.',
+        errors: error.response.message,
       };
     }
     // return {
@@ -32,7 +33,8 @@ export const errorWithProperMsg = (error: any): ServerActionErrorResponse => {
     // };
     return {
       type: 'error',
-      errors: 'Unauthorized access. Please log in and try again.',
+      // errors: 'Unauthorized access. Please log in and try again.',
+      errors: error.response.message,
     };
   }
   if (error.code === 403) {
@@ -44,8 +46,9 @@ export const errorWithProperMsg = (error: any): ServerActionErrorResponse => {
     // };
     return {
       type: 'error',
-      errors:
-        'Forbidden access. You do not have permission to perform this action.',
+      // errors:
+      //   'Forbidden access. You do not have permission to perform this action.',
+      errors: error.response.message,
     };
   }
   if (error.code === 404) {
@@ -57,19 +60,28 @@ export const errorWithProperMsg = (error: any): ServerActionErrorResponse => {
     // };
     return {
       type: 'error',
-      errors:
-        'Resource not found. Please check the URL or resource identifier.',
+      // errors:
+      //   'Resource not found. Please check the URL or resource identifier.',
+      errors: error.response.message,
     };
   }
-  if (error.code === 429) {
+  if (error.code === 409) {
     // return {
-    //   status: StatusCodes.TOO_MANY_REQUESTS,
-    //   message: 'Limit exceeded. Please try later.',
+    //   status: StatusCodes.NOT_FOUND,
+    //   message:
+    //     'Resource not found. Please check the URL or resource identifier.',
     //   error: error,
     // };
     return {
       type: 'error',
-      errors: 'Limit exceeded. Please try later.',
+      errors: error.response.message,
+    };
+  }
+  if (error.code === 429) {
+    return {
+      type: 'error',
+      // errors: 'Limit exceeded. Please try later.',
+      errors: error.response.message,
     };
   }
   if (error.code === 503) {
@@ -80,16 +92,11 @@ export const errorWithProperMsg = (error: any): ServerActionErrorResponse => {
     // };
     return {
       type: 'error',
-      errors: 'Service unavailable. Please try again later.',
+      // errors: 'Service unavailable. Please try again later.',
+      errors: error.response.message,
     };
   }
 
-  // Default case for any other errors
-  // return {
-  //   status: StatusCodes.INTERNAL_SERVER_ERROR,
-  //   message: 'Something went wrong. Please try again later.',
-  //   error: error,
-  // };
   return {
     type: 'error',
     errors: 'Something went wrong. Please try again later.',

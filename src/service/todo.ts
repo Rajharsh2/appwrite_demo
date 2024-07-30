@@ -108,7 +108,58 @@ export const getAllTodos = async (): Promise<
     const todos = await database.listDocuments(
       appwriteCredentials.demoDatabaseId,
       appwriteCredentials.todoCollectionId,
-      [Query.equal('userId', user.type === 'success' ? user.data['$id'] : '')],
+      [
+        Query.equal('userId', user.type === 'success' ? user.data['$id'] : ''),
+        // Query.search('title', 'app'),
+      ],
+    );
+    console.log(todos);
+    return {
+      type: 'success',
+      data: todos,
+    };
+  } catch (error) {
+    console.log(error);
+    return errorWithProperMsg(error);
+  }
+};
+
+export const getCompletedTodos = async (): Promise<
+  ServerActionResponse<Models.DocumentList<Models.Document>>
+> => {
+  try {
+    const user = await getCurrentUser();
+
+    const todos = await database.listDocuments(
+      appwriteCredentials.demoDatabaseId,
+      appwriteCredentials.todoCollectionId,
+      [
+        Query.equal('userId', user.type === 'success' ? user.data['$id'] : ''),
+        Query.equal('status', ['Completed']),
+      ],
+    );
+    console.log(todos);
+    return {
+      type: 'success',
+      data: todos,
+    };
+  } catch (error) {
+    return errorWithProperMsg(error);
+  }
+};
+export const getPendingTodos = async (): Promise<
+  ServerActionResponse<Models.DocumentList<Models.Document>>
+> => {
+  try {
+    const user = await getCurrentUser();
+
+    const todos = await database.listDocuments(
+      appwriteCredentials.demoDatabaseId,
+      appwriteCredentials.todoCollectionId,
+      [
+        Query.equal('userId', user.type === 'success' ? user.data['$id'] : ''),
+        Query.equal('status', ['Pending']),
+      ],
     );
     console.log(todos);
     return {

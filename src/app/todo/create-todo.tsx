@@ -13,7 +13,7 @@ import {toast} from 'sonner';
 import {Todo} from '@/types/todo';
 import {getAllSessions, getCurrentUser} from '@/service/auth';
 
-const CreateTodoPage = () => {
+const CreateTodoPage = ({todoss}: {todoss: Todo[]}) => {
   const [todos, setTodos] = useState<Todo[]>([]);
   const handleBtn1 = async () => {
     console.log('button1 clicked');
@@ -73,22 +73,23 @@ const CreateTodoPage = () => {
         </button>
       </div>
       <div>
-        {todos.map((todo: Todo, index: number) => (
-          <div key={index} className="mb-4 p-4 border border-gray-200 flex">
-            <div className=" mx-5 my-auto">
-              <h2 className="text-xl font-bold">{todo.title}</h2>
-              <h4 className="text-xl">{todo.description}</h4>
-              <h2 className="text-xl font-semibold">{todo.status}</h2>
+        {todos?.length > 0 &&
+          todos.map((todo: Todo, index: number) => (
+            <div key={index} className="mb-4 p-4 border border-gray-200 flex">
+              <div className=" mx-5 my-auto">
+                <h2 className="text-xl font-bold">{todo.title}</h2>
+                <h4 className="text-xl">{todo.description}</h4>
+                <h2 className="text-xl font-semibold">{todo.status}</h2>
+              </div>
+              <Image
+                src={todo.qrcode}
+                alt={`QR code for ${todo.title}`}
+                width={200}
+                height={200}
+                className="mx-auto mt-2"
+              />
             </div>
-            <Image
-              src={todo.qrcode}
-              alt={`QR code for ${todo.title}`}
-              width={200}
-              height={200}
-              className="mx-auto mt-2"
-            />
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );
